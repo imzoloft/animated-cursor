@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        font-family: 'QuickSand', sans-serif;
+        background-color: black;
+      }
+
+      #cursor {
+        pointer-events: none;
+        position: fixed;
+        width: 30px;
+        height: 30px;
+        background-color: white;
+        z-index: 9999;
+        border-radius: 50%;
+        transition: 0.1s;
+        mix-blend-mode: difference;
+      }
+
+      #navigation {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      li {
+        list-style: none;
+        font-size: 6rem;
+        margin: 1rem;
+        color: white;
+        font-weight: 300;
+      }
+    </style>
+    <title>Custom Cursor</title>
+  </head>
+
+  <body>
+    <div id="navigation">
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Services</li>
+        <li>Contact</li>
+      </ul>
+    </div>
+    <div id="cursor"></div>
+
+    <script>
+      const lis = document.querySelectorAll('li');
+
+      lis.forEach((li) => {
+        li.addEventListener('mouseenter', () => {
+          console.log('hi');
+          cursor.style.transform = 'scale(3)';
+        });
+
+        li.addEventListener('mouseleave', () => {
+          cursor.style.transform = 'scale(1)';
+        });
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+
+        cursor.style.left = clientX - 10 + 'px';
+        cursor.style.top = clientY - 10 + 'px';
+      });
+    </script>
+  </body>
+</html>
